@@ -11,13 +11,49 @@ class Program
     private const int DISCS_COUNT = 10;
     private const int DELAY_MS = 50;
     private static int _columnSize = 30;
+    private static HanoiTower _algorithm;
+    private static bool _isRunning = true;
+
     static void Main(string[] args)
     {
+        Console.Title = "Tower of Hanoi";
+
+        ShowMainMenu();
+
         _columnSize = Math.Max(6, GetDiscWidth(DISCS_COUNT) + 2);
         HanoiTower algorithm = new HanoiTower(DISCS_COUNT);
         algorithm.MoveCompleted += Algorithm_Visualize;
         Algorithm_Visualize(algorithm, EventArgs.Empty);
         algorithm.Start();
+    }
+
+    private static void ShowMainMenu()
+    {
+        Console.Clear();
+        Console.WriteLine("""
+            === TOWER OF HANOI ===
+
+            1. Start new game
+            2. Load game
+            3. Exit
+            """);
+        Console.Write("Select an option: ");
+        var key = Console.ReadKey();
+        switch (key.KeyChar)
+        {
+            case '1':
+                GetUserInput(); // To be added
+                break;
+            case '2':
+                LoadGame(); // To be added
+                break;
+            case '3':
+                _isRunning = false;
+                return;
+            default:
+                ShowMainMenu();
+                break;
+        }
     }
 
     private static void Algorithm_Visualize(object? sender, EventArgs e)
