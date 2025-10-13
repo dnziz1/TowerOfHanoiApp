@@ -21,10 +21,9 @@ public class HanoiTower
         From = new Stack<int>();
         To = new Stack<int>();
         Auxillary = new Stack<int>();
-        for (int i = 1; i < discs; i++)
+        for (int i = discs; i >= 1; i--)
         {
-            int size = discs - i + 1;
-            From.Push(size);
+            From.Push(i);
         }
 
     }
