@@ -15,6 +15,10 @@ public class HanoiTower
     public Stack<int> Auxillary { get; private set; }
     public event EventHandler<EventArgs> MoveCompleted;
 
+    // Properties for pause/resume functionality
+    public bool IsPaused { get; private set; }
+    public bool IsCompleted { get; private set; }
+
     public HanoiTower(int discs)
     {
         DiscsCount = discs;
@@ -37,7 +41,19 @@ public class HanoiTower
     {
         if (discs > 0)
         {
+            // Wait if paused before recursive call
+            while (IsPaused)
+            {
+                Task.Delay(100).Wait();
+            }
             Move(discs - 1, from, auxillary, to);
+
+            // Wait if paused before making the move
+
+            while (IsPaused)
+            {
+                Task.Delay(100).Wait();
+            }
 
             to.Push(from.Pop());
             MovesCount++;
@@ -45,5 +61,17 @@ public class HanoiTower
 
             Move(discs - 1, auxillary, to, from);
         }
+    }
+
+    // Pause the algorithm
+    public void Pause()
+    {
+        IsPaused = true;
+    }
+
+    // Resume the algorithm
+    public void Resume()
+    {
+        IsPaused = false;
     }
 }
