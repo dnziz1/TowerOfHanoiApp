@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Following Marcin Jamro's tutorial on Tower of Hanoi using stacks.
 /// </summary>
-class Program
+public class Program
 {
     private const int DISCS_COUNT = 10;
     private const int DELAY_MS = 50;
@@ -54,6 +54,16 @@ class Program
                 ShowMainMenu();
                 break;
         }
+    }
+
+    private static void GetUserInput()
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void LoadGame()
+    {
+        throw new NotImplementedException();
     }
 
     private static void Algorithm_Visualize(object? sender, EventArgs e)
